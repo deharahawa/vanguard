@@ -51,6 +51,12 @@ function LoginContent() {
           </p>
         </div>
 
+        {!process.env.NEXT_PUBLIC_SUPABASE_URL && (
+            <div className="bg-red-900/50 border border-red-500/50 p-4 rounded text-xs text-red-200 font-mono text-center">
+                WARNING: ENV CONFIGURATION MISSING
+            </div>
+        )}
+
         <form className="bg-zinc-900 border border-zinc-800 rounded-xl p-8 shadow-2xl space-y-6">
           <div className="space-y-4">
              <div className="space-y-2">

@@ -7,9 +7,7 @@ export const updateSession = async (request: NextRequest) => {
   try {
     // Create an unmodified response
     let response = NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
+      request,
     });
 
     const supabase = createServerClient(
@@ -45,9 +43,7 @@ export const updateSession = async (request: NextRequest) => {
     // This is likely because you have not set up environment variables.
     // Check out http://localhost:3000 for Next Steps.
     return NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
+      request,
     });
   }
 };
