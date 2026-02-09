@@ -1,0 +1,57 @@
+# Defaults
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnpm-store
+.store
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+coverage
+
+# next.js
+.next/
+out/
+build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.metro-health-check*
+
+# local env files
+.env*.local
+.env
+# Keep .env.example
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+expo-env.d.ts
+
+# expo
+.expo/
+dist/
+web-build/
+*.jks
+*.p12
+*.keystore
+*.aab
+*.key
+*.mobileprovision
+
+# generated native folders (Prebuild)
+apps/mobile/ios/
+apps/mobile/android/

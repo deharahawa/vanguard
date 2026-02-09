@@ -1,0 +1,19 @@
+{
+  "name": "@vanguard/db",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "scripts": {
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "generate": "prisma generate",
+    "seed": "tsx seed.ts"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
+  }
+}

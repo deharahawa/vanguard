@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model DailyMetrics {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime @default(now())
+  hydration Boolean  @default(false)
+  breathing Boolean  @default(false)
+  mobility  Boolean  @default(false)
+  reset     Boolean  @default(false)
+  diplomat  Boolean  @default(false)
+  mood      Int
+  summary   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+model MentorBriefing {
+  id            String   @id @default(uuid())
+  userId        String
+  content       String
+  weekStartDate DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, weekStartDate])
+}
+
+model Perk {
+  id          String     @id
+  label       String
+  category    String     // OPERATOR, STOIC, DIPLOMAT
+  description String
+  users       UserPerk[]
+}
+
+model UserPerk {
+  id        String   @id @default(uuid())
+  userId    String
+  perkId    String
+  perk      Perk     @relation(fields: [perkId], references: [id])
+  xp        Int      @default(0)
+  level     Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, perkId])
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  codename  String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

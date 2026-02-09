@@ -1,0 +1,1 @@
+{"name": "@vanguard/ui", "version": "0.0.0", "main": "./index.tsx", "types": "./index.tsx", "devDependencies": {"react": "^18.0.0", "typescript": "^5.0.0"}}
