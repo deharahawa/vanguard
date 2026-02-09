@@ -82,7 +82,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
         setTimeout(() => {
             router.push("/chronicle");
         }, 2000);
-    } catch (error) {
+    } catch {
         toast.error("TRANSMISSION FAILED");
         setIsPending(false);
     }
@@ -232,7 +232,18 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
   );
 }
 
-function ToggleItem({ active, onClick, icon, label, color, bg, border, glow, name, fullWidth }: any) {
+function ToggleItem({ active, onClick, icon, label, color, bg, border, glow, name, fullWidth }: {
+    active: boolean;
+    onClick: () => void;
+    icon: React.ReactNode;
+    label: string;
+    color: string;
+    bg: string;
+    border: string;
+    glow: string;
+    name: string;
+    fullWidth?: boolean;
+}) {
   return (
     <button
       type="button"

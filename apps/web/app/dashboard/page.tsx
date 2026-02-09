@@ -59,7 +59,7 @@ export default async function Dashboard() {
 
         <div className="w-full flex flex-col items-center gap-8">
           <TrinityHexagon stats={stats} />
-          <ProtocolCard initialMetrics={metrics as any} />
+          <ProtocolCard initialMetrics={metrics} />
         </div>
       </div>
     </div>

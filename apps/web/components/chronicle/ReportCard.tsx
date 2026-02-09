@@ -107,7 +107,13 @@ export function ReportCard({ data, briefing }: { data: WeeklyReport, briefing?: 
   );
 }
 
-function StatBar({ icon, label, value, total, color }: any) {
+function StatBar({ icon, label, value, total, color }: {
+    icon: React.ReactNode;
+    label: string;
+    value: number;
+    total: number;
+    color: string;
+}) {
   const percentage = Math.round((value / total) * 100);
   return (
     <div className="flex items-center gap-3">

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { clsx } from "clsx";
 import type { CalendarDay } from "@/actions/history";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -78,7 +77,6 @@ export function TacticalCalendar({ data, year, month }: TacticalCalendarProps) {
 
         {/* Days */}
         {days.map(day => {
-            const dateStr = new Date(year, month - 1, day).toISOString().split('T')[0];
             // Fix: Simple date compare might fail due to timezone if not careful. 
             // The server action returns ISO strings.
             // Let's try to find matching date using string comparison which is safer for YYYY-MM-DD

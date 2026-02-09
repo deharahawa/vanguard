@@ -8,7 +8,7 @@ export default async function ProfilePage() {
   let data;
   try {
     data = await getProfileData();
-  } catch (e) {
+  } catch {
     redirect("/login");
   }
 
@@ -83,7 +83,15 @@ export default async function ProfilePage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {perks.map((p: any) => (
+                    {perks.map((p: {
+                        perkId: string;
+                        level: number;
+                        xp: number;
+                        perk: {
+                            label: string;
+                            category: string;
+                        }
+                    }) => (
                         <SkillCard 
                             key={p.perkId}
                             label={p.perk.label} // Joined via include

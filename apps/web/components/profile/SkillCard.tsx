@@ -1,6 +1,6 @@
 "use client";
 
-import { clsx } from "clsx";
+
 
 interface SkillCardProps {
   label: string;
