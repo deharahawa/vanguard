@@ -7,7 +7,9 @@ import { useSearchParams } from "next/navigation";
 import { login, signUp } from "./actions";
 import { motion } from "framer-motion";
 
-export default function LoginPage() {
+import { Suspense } from "react";
+
+function LoginContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
 
@@ -104,6 +106,20 @@ export default function LoginPage() {
         </p>
       </motion.div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+        <div className="min-h-screen bg-black flex items-center justify-center p-4">
+            <div className="text-zinc-500 font-mono text-xs animate-pulse">
+                ESTABLISHING SECURE UPLINK...
+            </div>
+        </div>
+    }>
+        <LoginContent />
+    </Suspense>
   );
 }
 
