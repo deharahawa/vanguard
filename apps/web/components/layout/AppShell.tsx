@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Sparkles, Target, Archive, Shield, LogOut } from "lucide-react";
+import { Home, Sparkles, Target, Archive, Shield } from "lucide-react";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 
 export function AppShell({ children }: { children: React.ReactNode }) {

@@ -61,7 +61,7 @@ export function OracleWidget() {
         setIsOpen(false);
         setTimeout(() => setCard(null), 500); // Clear after animation
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to acknowledge.");
     }
   };
