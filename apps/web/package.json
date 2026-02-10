@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.94.0",
     "@vanguard/db": "workspace:*",
     "ai": "^6.0.77",
+    "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.31.0",
     "lucide-react": "^0.563.0",
@@ -22,9 +23,11 @@
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^2.0.7",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

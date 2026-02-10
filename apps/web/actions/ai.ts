@@ -15,10 +15,14 @@ export async function generateBriefing() {
     throw new Error("Unauthorized");
   }
 
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setDate(endDate.getDate() - 6);
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0 (Sun) - 6 (Sat)
+  const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - daysSinceMonday);
   startDate.setHours(0, 0, 0, 0);
+
+  const daysElapsed = daysSinceMonday + 1;
 
   const logs = await prisma.dailyMetrics.findMany({
     where: {
@@ -32,8 +36,11 @@ export async function generateBriefing() {
     },
   });
 
-  if (logs.length === 0) {
+  if (logs.length === 0 && daysElapsed > 1) {
     return "No telemetry data detected. Execute protocol to initiate analysis.";
+  } else if (logs.length === 0) {
+      // It's day 1 and no logs yet
+      return "Day 1 of the cycle. Initiate protocols.";
   }
 
   // Check for existing cache
@@ -49,13 +56,12 @@ export async function generateBriefing() {
     },
   });
 
-  if (cachedBriefing && cachedBriefing.updatedAt > lastLogUpdate) {
+  if (cachedBriefing && cachedBriefing.updatedAt > lastLogUpdate && cachedBriefing.createdAt.toDateString() === today.toDateString()) {
     return cachedBriefing.content;
   }
 
   // Quick Stats
-  const totalDays = 7;
-  const maxPossible = totalDays * 4; 
+  const maxPossible = daysElapsed * 4; 
   let totalChecks = 0;
   let summaryText = "";
 
@@ -69,8 +75,15 @@ export async function generateBriefing() {
 
   const adherence = Math.round((totalChecks / maxPossible) * 100);
 
-  // Compressed prompt with Direct Tone
-  const prompt = `Role:Tactical Mentor. UserStats:Adherence ${adherence}%. Logs:${summaryText}. Task:Analyze performance. Speak DIRECTLY to user ("You"). <50% adherence: stern/encourage. >80%: commend/warn. ID patterns. Max 3 sentences. Text only.`;
+  // Context-Aware Prompt
+  let prompt = "";
+  if (daysElapsed < 5) {
+     // SPOTTER MODE
+     prompt = `Role:Tactical Spotter. UserStats:Adherence ${adherence}% (Day ${daysElapsed}/7). Logs:${summaryText}. Task:Analyze ONLY today's/recent performance. Be brief(1 sentence). Celebrate specific wins or gently nudge missed habits. Do NOT mention weekly percentages.`;
+  } else {
+     // GENERAL MODE
+     prompt = `Role:Tactical Mentor. UserStats:Adherence ${adherence}% (Day ${daysElapsed}/7). Logs:${summaryText}. Analyze full week. Use weekly percentage. Be strategic. <50%: stern. >80%: commend. Max 3 sentences.`;
+  }
 
   try {
     const { text } = await generateText({

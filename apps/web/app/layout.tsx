@@ -33,17 +33,41 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-export default function RootLayout({
+import { MorningDossier } from "@/components/briefing/MorningDossier";
+import { generateDailyBriefing } from "@/actions/briefing";
+import { createClient } from "@/utils/supabase/server";
+
+import { AppShell } from "@/components/layout/AppShell";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let briefingData = null;
+  if (user) {
+      try {
+        const briefing = await generateDailyBriefing();
+        if (!briefing.viewed) {
+             briefingData = briefing;
+        }
+      } catch (e) {
+        console.error("Failed to generate briefing:", e);
+      }
+  }
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-foreground`}
       >
-        {children}
+        <AppShell>
+            {children}
+        </AppShell>
+        {briefingData && <MorningDossier data={briefingData} />}
         <Toaster richColors position="top-center" theme="dark" />
       </body>
     </html>

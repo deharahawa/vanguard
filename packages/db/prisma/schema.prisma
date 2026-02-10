@@ -66,3 +66,32 @@ model Profile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model OracleCard {
+  id       String  @id @default(uuid())
+  content  String
+  author   String?
+  category String  // STOIC | TACTICAL | MENTAL_MODEL
+}
+
+model BacklogItem {
+  id        String   @id @default(uuid())
+  userId    String
+  content   String
+  status    String   @default("PENDING") // PENDING | COMPLETED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DailyBriefing {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime
+  wisdoms   Json
+  missionId String?
+  viewed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])
+}
