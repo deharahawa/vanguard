@@ -60,7 +60,6 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
             toast("LEVEL UP", {
                 description: result.levelUp,
                 duration: 5000,
-                // Custom style for level up
                 style: {
                     background: 'linear-gradient(to right, #10b981, #3b82f6)',
                     color: 'white',
@@ -78,6 +77,19 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                 duration: 3000,
             });
         }
+
+        // Reset Form State
+        setMood(3);
+        setToggles({
+            hydration: false,
+            breathing: false,
+            mobility: false,
+            reset: false,
+            diplomat: false,
+        });
+        // Reset Textarea (Uncontrolled)
+        const form = document.querySelector("form");
+        if (form) form.reset();
 
         setTimeout(() => {
             router.push("/chronicle");
