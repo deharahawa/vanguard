@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { logDailyMetrics } from "@/actions/daily";
 import { toast } from "sonner";
+import { useHaptic } from "@/hooks/useHaptic";
 import { useRouter } from "next/navigation";
 
 type Metrics = {
@@ -27,6 +28,8 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
     reset: initialMetrics?.reset || false,
     diplomat: initialMetrics?.diplomat || false,
   });
+  const router = useRouter();
+  const { triggerHaptic } = useHaptic();
   const [isPending, setIsPending] = useState(false);
 
   // Sync state if initialMetrics changes (revalidation)
@@ -48,6 +51,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
   const router = useRouter();
 
   const handleToggle = (key: keyof typeof toggles) => {
+    triggerHaptic("light");
     setToggles((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 

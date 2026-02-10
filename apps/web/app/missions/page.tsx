@@ -1,5 +1,6 @@
 import { AddMissionForm } from "@/components/missions/AddMissionForm";
-import { CheckCircle, Ghost, Target, Trash2 } from "lucide-react";
+import { CompleteMissionButton } from "@/components/missions/CompleteMissionButton";
+import { Ghost, Target, Trash2 } from "lucide-react";
 import { generateDailyBriefing, completeBacklogItem, getBacklog, deleteBacklogItem } from "@/actions/briefing";
 import { revalidatePath } from "next/cache";
 
@@ -35,9 +36,7 @@ export default async function MissionsPage() {
                                    revalidatePath("/missions");
                                }
                            }}>
-                               <button type="submit" className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-black uppercase tracking-widest rounded-lg transition-all hover:scale-105 shadow-lg shadow-red-900/20 text-xs">
-                                   <CheckCircle size={16} /> Mark Complete
-                               </button>
+                               <CompleteMissionButton />
                            </form>
                         </div>
                     ) : (

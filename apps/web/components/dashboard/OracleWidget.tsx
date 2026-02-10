@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { useRouter } from "next/navigation";
 import { drawOracleCard, acknowledgeOracle } from "@/actions/oracle";
+import { useHaptic } from "@/hooks/useHaptic";
 
 type OracleCard = {
   id: string;
@@ -20,6 +21,7 @@ export function OracleWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { triggerHaptic } = useHaptic();
 
   const handleConsult = async () => {
     setIsLoading(true);
@@ -42,6 +44,7 @@ export function OracleWidget() {
     try {
       const result = await acknowledgeOracle();
       if (result.success) {
+        triggerHaptic("success");
         confetti({
           particleCount: 100,
           spread: 70,

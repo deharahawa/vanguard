@@ -4,9 +4,29 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Home, Sparkles, Target, Archive, Shield } from "lucide-react";
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import { useState, useEffect } from "react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isOffline, setIsOffline] = useState(false);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    // Initial check
+    if (typeof window !== "undefined") {
+        setIsOffline(!navigator.onLine);
+    }
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   // Hide navigation on login/onboarding
   if (pathname === "/login" || pathname === "/onboarding") {
@@ -22,7 +42,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="flex h-screen bg-black text-white">
+    <div className="flex h-screen bg-black text-white relative">
+        {/* Offline Indicator */}
+        {isOffline && (
+            <div className="fixed top-4 right-4 z-[100] animate-pulse">
+                <div className="w-3 h-3 bg-amber-500 rounded-full shadow-[0_0_10px_#f59e0b] border border-amber-300" title="Offline Mode: Buffered" />
+            </div>
+        )}
+
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r border-zinc-900 p-6 bg-zinc-950">
         <div className="mb-12">
