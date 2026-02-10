@@ -8,6 +8,8 @@ import { logDailyMetrics } from "@/actions/daily";
 import { toast } from "sonner";
 import { useHaptic } from "@/hooks/useHaptic";
 import { useRouter } from "next/navigation";
+import { getProtocolConfig, DEFAULT_PROTOCOL_CONFIG } from "@/actions/settings";
+import { useEffect } from "react";
 
 type Metrics = {
     hydration: boolean;
@@ -20,7 +22,17 @@ type Metrics = {
 }
 
 export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | null }) {
+  const router = useRouter();
+  const { triggerHaptic } = useHaptic();
+  const [labels, setLabels] = useState(DEFAULT_PROTOCOL_CONFIG); 
+  const [isPending, setIsPending] = useState(false);
   const [mood, setMood] = useState(initialMetrics?.mood || 3);
+
+  // Fetch labels on mount
+  useEffect(() => {
+      getProtocolConfig().then(setLabels).catch(() => {});
+  }, []);
+
   const [toggles, setToggles] = useState({
     hydration: initialMetrics?.hydration || false,
     breathing: initialMetrics?.breathing || false,
@@ -28,27 +40,20 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
     reset: initialMetrics?.reset || false,
     diplomat: initialMetrics?.diplomat || false,
   });
-  const router = useRouter();
-  const { triggerHaptic } = useHaptic();
-  const [isPending, setIsPending] = useState(false);
 
-  // Sync state if initialMetrics changes (revalidation)
-  // This is optional if we assume full page reload, but good for revalidatePath updates
-  // useEffect(() => {
-  //   if (initialMetrics) {
-  //       setMood(initialMetrics.mood);
-  //       setToggles({
-  //           hydration: initialMetrics.hydration,
-  //           breathing: initialMetrics.breathing,
-  //           mobility: initialMetrics.mobility,
-  //           reset: initialMetrics.reset,
-  //           diplomat: initialMetrics.diplomat
-  //       });
-  //   }
-  // }, [initialMetrics]);
-
-
-  const router = useRouter();
+  // Sync state if initialMetrics changes
+  useEffect(() => {
+    if (initialMetrics) {
+        setToggles({
+            hydration: initialMetrics.hydration,
+            breathing: initialMetrics.breathing,
+            mobility: initialMetrics.mobility,
+            reset: initialMetrics.reset,
+            diplomat: initialMetrics.diplomat,
+        });
+        setMood(initialMetrics.mood);
+    }
+  }, [initialMetrics]);
 
   const handleToggle = (key: keyof typeof toggles) => {
     triggerHaptic("light");
@@ -127,7 +132,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   active={toggles.hydration}
                   onClick={() => handleToggle("hydration")}
                   icon={<Droplet className="w-5 h-5" />}
-                  label="Hydrate"
+                  label={labels.op1}
                   color="text-amber-100"
                   bg="bg-amber-900/20"
                   border="border-amber-900/50"
@@ -138,7 +143,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   active={toggles.mobility}
                   onClick={() => handleToggle("mobility")}
                   icon={<Footprints className="w-5 h-5" />}
-                  label="Mobility"
+                  label={labels.op2}
                   color="text-amber-100"
                   bg="bg-amber-900/20"
                   border="border-amber-900/50"
@@ -160,7 +165,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   active={toggles.breathing}
                   onClick={() => handleToggle("breathing")}
                   icon={<Wind className="w-5 h-5" />}
-                  label="Breath"
+                  label={labels.st1}
                   color="text-indigo-100"
                   bg="bg-indigo-900/20"
                   border="border-indigo-900/50"
@@ -171,7 +176,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   active={toggles.reset}
                   onClick={() => handleToggle("reset")}
                   icon={<Zap className="w-5 h-5" />}
-                  label="Reset"
+                  label={labels.st2}
                   color="text-indigo-100"
                   bg="bg-indigo-900/20"
                   border="border-indigo-900/50"
@@ -193,7 +198,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   active={toggles.diplomat}
                   onClick={() => handleToggle("diplomat")}
                   icon={<Users className="w-5 h-5" />}
-                  label="Alignment"
+                  label={labels.dip1}
                   color="text-emerald-100"
                   bg="bg-emerald-900/20"
                   border="border-emerald-900/50"

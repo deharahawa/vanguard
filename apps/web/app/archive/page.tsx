@@ -1,5 +1,6 @@
-import { TacticalCalendar } from "@/components/archive/TacticalCalendar";
+import { ArchiveInterface } from "@/components/archive/ArchiveInterface";
 import { getMonthlyCalendar } from "@/actions/history";
+import { getTrendData } from "@/actions/analytics";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +24,10 @@ export default async function ArchivePage({
   const year = searchParams.year ? parseInt(searchParams.year) : now.getFullYear();
   const month = searchParams.month ? parseInt(searchParams.month) : now.getMonth() + 1;
 
-  const calendarData = await getMonthlyCalendar(year, month);
+  const [calendarData, trendData] = await Promise.all([
+      getMonthlyCalendar(year, month),
+      getTrendData(30)
+  ]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center p-8 space-y-12">
@@ -41,7 +45,12 @@ export default async function ArchivePage({
             <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">Historical Performance Database</p>
         </header>
 
-        <TacticalCalendar data={calendarData} year={year} month={month} />
+        <ArchiveInterface 
+            calendarData={calendarData} 
+            trendData={trendData} 
+            year={year} 
+            month={month} 
+        />
 
         {/* Vault (Future Expansion) */}
         <div className="border-t border-zinc-900 pt-8 opacity-50 pointer-events-none">
