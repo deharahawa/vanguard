@@ -1,4 +1,5 @@
 import { AddMissionForm } from "@/components/missions/AddMissionForm";
+import { CheckCircle, Ghost, Target, Trash2 } from "lucide-react";
 
 export default async function MissionsPage() {
     const briefing = await generateDailyBriefing();
