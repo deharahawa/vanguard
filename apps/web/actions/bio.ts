@@ -59,7 +59,7 @@ export async function scanNutritionLabel(formData: FormData) {
 
   try {
     const { object } = await generateObject({
-      model: google("gemini-1.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       schema: nutritionSchema,
       messages: [
         {
@@ -271,7 +271,7 @@ export async function getBioStats(days: number = 30) {
   }));
 }
 
-export async function consultBioAI(context: "MEAL" | "WORKOUT" | "SLEEP", data: Record<string, any>) {
+export async function consultBioAI(context: "MEAL" | "WORKOUT" | "SLEEP", data: any) {
     // const user = await getUser(); // Unused for now, generic advice based on data input
     
     // System Prompt for Bio-Engine (PT-BR)
@@ -291,7 +291,7 @@ export async function consultBioAI(context: "MEAL" | "WORKOUT" | "SLEEP", data: 
 
     try {
         const { text } = await generateText({
-            model: google("gemini-1.5-flash"),
+            model: google("gemini-2.5-flash-lite"),
             system: systemPrompt,
             prompt: "Analise este intel e forneça relatório tático.",
         });
@@ -388,8 +388,8 @@ export async function evaluateNutrition(date: Date) {
 
   try {
     const { text } = await generateText({
-      model: google("gemini-1.5-flash"),
-      system: "Você é um Nutricionista Tático do Vanguard Protocol. Responda em PT-BR, curto e grosso.",
+      model: google("gemini-2.5-flash-lite"),
+      system: "Você é um Nutricionista Tático do Vanguard Protocol. Responda em PT-BR",
       prompt: prompt,
     });
 
