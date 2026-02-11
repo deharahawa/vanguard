@@ -119,7 +119,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Bottom Bar */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-zinc-950 border-t border-zinc-900 px-2 py-4 flex justify-between items-center z-50 safe-area-bottom overflow-x-auto">
-        {NAV_ITEMS.map((item) => {
+        {/* Mobile Specific Items: Command, Missions, Protocol (Center), Network, Stream */}
+        {[
+            NAV_ITEMS.find(i => i.label === "Command")!,
+            NAV_ITEMS.find(i => i.label === "Missions")!,
+            NAV_ITEMS.find(i => i.label === "Protocol")!,
+            NAV_ITEMS.find(i => i.label === "Network")!,
+            NAV_ITEMS.find(i => i.label === "Stream")!,
+        ].map((item) => {
             const isActive = pathname === item.href;
             const isSpecial = item.special;
 

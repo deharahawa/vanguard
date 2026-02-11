@@ -6,6 +6,7 @@ import { prisma } from "@vanguard/db";
 import { getTrinityStats } from "@/actions/stats";
 import { TrinityHexagon } from "@/components/dashboard/TrinityHexagon";
 import { OracleWidget } from "@/components/dashboard/OracleWidget";
+import { QuickAccess } from "@/components/dashboard/QuickAccess";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,7 @@ export default async function Dashboard() {
 
         <div className="w-full flex flex-col items-center gap-8">
           <TrinityHexagon stats={stats} />
+          <QuickAccess />
           <OracleWidget />
           <ProtocolCard initialMetrics={metrics} />
         </div>
