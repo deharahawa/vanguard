@@ -10,20 +10,68 @@ datasource db {
 }
 
 model DailyMetrics {
+  id         String   @id @default(uuid())
+  userId     String
+  date       DateTime @default(now())
+  hydration  Boolean  @default(false) // Deprecated/Legacy
+  breathing  Boolean  @default(false)
+  mobility   Boolean  @default(false) // Deprecated/Legacy
+  reset      Boolean  @default(false)
+  diplomat   Boolean  @default(false)
+  bio_engine Boolean  @default(false) // New 4th Pillar
+  mood       Int
+  summary    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+// ... (other models)
+
+model BioMetric {
+  id              String    @id @default(uuid())
+  userId          String
+  date            DateTime  @default(now())
+  sleepStart      DateTime?
+  sleepEnd        DateTime?
+  sleepQuality    Int? // 1-5
+  sleepHours      Float?    // Calculated/Input
+  morningVitality Boolean?
+  stoolType       Int? // Bristol 1-7
+  stoolColor      String?
+  stoolNotes      String?
+  calories        Int?      // Daily cached total
+  protein         Int?      // Daily cached total
+  workoutType     String?   // e.g., "HYBRID", "LIFT"
+  workoutVolume   Int?      // e.g., Total tonnage or duration
+  supplementsTaken Boolean  @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([userId, date])
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  SNACK
+  DINNER
+}
+
+model MealLog {
   id        String   @id @default(uuid())
   userId    String
   date      DateTime @default(now())
-  hydration Boolean  @default(false)
-  breathing Boolean  @default(false)
-  mobility  Boolean  @default(false)
-  reset     Boolean  @default(false)
-  diplomat  Boolean  @default(false)
-  mood      Int
-  summary   String?
+  type      MealType
+  items     String[] // List of food items
+  photoUrl  String?
+  calories  Int?
+  protein   Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, date])
+  @@unique([userId, date, type])
 }
 
 model MentorBriefing {
@@ -173,4 +221,69 @@ model DailyStreamCache {
   createdAt  DateTime @default(now())
 
   @@unique([userId, date, batchIndex])
+}
+
+
+
+model Meal {
+  id         String        @id @default(uuid())
+  userId     String
+  name       String
+  calories   Int
+  protein    Float
+  carbs      Float
+  fat        Float
+  isTemplate Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  intakes    DailyIntake[]
+}
+
+model DailyIntake {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime @default(now())
+  mealId    String
+  meal      Meal     @relation(fields: [mealId], references: [id])
+  quantity  Float    @default(1.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WorkoutSession {
+  id        String        @id @default(uuid())
+  userId    String
+  date      DateTime      @default(now())
+  type      String // LIFT | CARDIO
+  name      String?       // e.g. "Program A"
+  isTemplate Boolean      @default(false)
+  notes     String?
+  imageUrl  String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  sets      ExerciseSet[]
+}
+
+model ExerciseSet {
+  id        String         @id @default(uuid())
+  sessionId String
+  session   WorkoutSession @relation(fields: [sessionId], references: [id])
+  name      String
+  weight    Float
+  reps      Int
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model OutputLog {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime @default(now()) // Captures specific time
+  stoolType Int // Bristol 1-7
+  stoolColor String
+  stoolNotes String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, date])
 }

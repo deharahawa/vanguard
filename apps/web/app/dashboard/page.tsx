@@ -1,12 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { ProtocolCard } from "@/components/daily/ProtocolCard";
-
 import { prisma } from "@vanguard/db";
-import { getTrinityStats } from "@/actions/stats";
-import { TrinityHexagon } from "@/components/dashboard/TrinityHexagon";
+import { getQuadriviumStats } from "@/actions/stats";
+import Quadrivium from "@/components/dashboard/Quadrivium";
 import { OracleWidget } from "@/components/dashboard/OracleWidget";
 import { QuickAccess } from "@/components/dashboard/QuickAccess";
+import { ProtocolCard } from "@/components/daily/ProtocolCard";
 
 export const dynamic = "force-dynamic";
 
@@ -33,8 +32,11 @@ export default async function Dashboard() {
         },
         },
     }),
-    getTrinityStats()
+    getQuadriviumStats()
   ]);
+
+  // Serialize metrics to prevent hydration issues with Date objects
+  const metricsJson = metrics ? JSON.parse(JSON.stringify(metrics)) : null;
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
@@ -47,10 +49,10 @@ export default async function Dashboard() {
         </header>
 
         <div className="w-full flex flex-col items-center gap-8">
-          <TrinityHexagon stats={stats} />
+          <Quadrivium stats={stats} />
           <QuickAccess />
           <OracleWidget />
-          <ProtocolCard initialMetrics={metrics} />
+          <ProtocolCard initialMetrics={metricsJson} />
         </div>
       </div>
     </div>

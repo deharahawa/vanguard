@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Sparkles, Target, Archive, Settings, Radio, User, Zap, Users } from "lucide-react";
+import { Home, Sparkles, Target, Archive, Settings, Radio, User, Zap, Users, Dna } from "lucide-react";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { useState, useEffect } from "react";
 
@@ -41,6 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     { label: "Oracle", icon: Sparkles, href: "/briefing" },
     { label: "Network", icon: Users, href: "/network" },
     { label: "Stream", icon: Radio, href: "/stream" },
+    { label: "Bio", icon: Dna, href: "/bio" },
     { label: "Protocol", icon: Zap, href: "#adrenaline", special: true }, // The Zap
     { label: "Missions", icon: Target, href: "/missions" },
     { label: "Archive", icon: Archive, href: "/archive" },
@@ -125,7 +126,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             NAV_ITEMS.find(i => i.label === "Missions")!,
             NAV_ITEMS.find(i => i.label === "Protocol")!,
             NAV_ITEMS.find(i => i.label === "Network")!,
-            NAV_ITEMS.find(i => i.label === "Stream")!,
+            NAV_ITEMS.find(i => i.label === "Bio")!,
         ].map((item) => {
             const isActive = pathname === item.href;
             const isSpecial = item.special;

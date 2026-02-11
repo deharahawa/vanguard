@@ -38,6 +38,7 @@ export async function logDailyMetrics(formData: FormData) {
   const mobility = formData.get("mobility") === "on";
   const reset = formData.get("reset") === "on";
   const diplomat = formData.get("diplomat") === "on";
+  const bio_engine = formData.get("bio_engine") === "on";
   const mood = Number(formData.get("mood"));
   const summary = String(formData.get("summary"));
 
@@ -114,6 +115,7 @@ export async function logDailyMetrics(formData: FormData) {
       mobility,
       reset,
       diplomat,
+      bio_engine,
       mood,
       summary,
     },
@@ -125,6 +127,7 @@ export async function logDailyMetrics(formData: FormData) {
       mobility,
       reset,
       diplomat,
+      bio_engine,
       mood,
       summary,
     },

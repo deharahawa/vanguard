@@ -18,6 +18,7 @@ type Metrics = {
     mobility: boolean;
     reset: boolean;
     diplomat: boolean;
+    bio_engine: boolean;
     mood: number;
     summary: string | null;
 }
@@ -40,6 +41,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
     mobility: initialMetrics?.mobility || false,
     reset: initialMetrics?.reset || false,
     diplomat: initialMetrics?.diplomat || false,
+    bio_engine: initialMetrics?.bio_engine || false,
   });
 
   // Sync state if initialMetrics changes
@@ -51,6 +53,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
             mobility: initialMetrics.mobility,
             reset: initialMetrics.reset,
             diplomat: initialMetrics.diplomat,
+            bio_engine: initialMetrics.bio_engine,
         });
         setMood(initialMetrics.mood);
     }
@@ -96,6 +99,7 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
             mobility: false,
             reset: false,
             diplomat: false,
+            bio_engine: false,
         });
         // Reset Textarea (Uncontrolled)
         const form = document.querySelector("form");
@@ -183,6 +187,29 @@ export function ProtocolCard({ initialMetrics }: { initialMetrics: Metrics | nul
                   border="border-indigo-900/50"
                   glow="shadow-[0_0_15px_rgba(99,102,241,0.2)]"
                   name="reset"
+                />
+             </div>
+        </section>
+
+        {/* BIO-ENGINE SECTION */}
+        <section className="space-y-3">
+             <div className="flex items-center gap-2">
+                <div className="h-px flex-1 bg-zinc-900"></div>
+                <h3 className="text-[10px] font-bold text-rose-500/80 uppercase tracking-widest">Bio-Engine // Vitality</h3>
+                <div className="h-px flex-1 bg-zinc-900"></div>
+             </div>
+             <div className="grid grid-cols-1 gap-3">
+                <ToggleItem
+                  active={toggles.bio_engine}
+                  onClick={() => handleToggle("bio_engine")}
+                  icon={<Zap className="w-5 h-5" />} // Using Zap for now, maybe Change to Activity or Heart
+                  label="Bio-Active"
+                  color="text-rose-100"
+                  bg="bg-rose-900/20"
+                  border="border-rose-900/50"
+                  glow="shadow-[0_0_15px_rgba(244,63,94,0.2)]"
+                  name="bio_engine"
+                  fullWidth
                 />
              </div>
         </section>
