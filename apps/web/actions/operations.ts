@@ -113,3 +113,63 @@ export async function completeOperation(id: string) {
         return { error: "Failed to complete operation" };
     }
 }
+
+export async function updateOperation(id: string, data: { title: string; deadline?: Date }) {
+    try {
+        await prisma.operation.update({
+            where: { id },
+            data: {
+                title: data.title,
+                deadline: data.deadline
+            }
+        });
+        revalidatePath('/missions');
+        return { success: true };
+    } catch {
+        return { error: "Failed to update operation" };
+    }
+}
+
+export async function deleteOperation(id: string) {
+    try {
+        // Unlink tasks first (optional, Prisma might handle cascade if configured, but let's be safe for "SET NULL" behavior)
+        await prisma.backlogItem.updateMany({
+            where: { operationId: id },
+            data: { operationId: null }
+        });
+
+        await prisma.operation.delete({
+            where: { id }
+        });
+        revalidatePath('/missions');
+        return { success: true };
+    } catch {
+        return { error: "Failed to delete operation" };
+    }
+}
+
+export async function assignTaskToOperation(taskId: string, operationId: string) {
+    try {
+        await prisma.backlogItem.update({
+            where: { id: taskId },
+            data: { operationId }
+        });
+        revalidatePath('/missions');
+        return { success: true };
+    } catch {
+        return { error: "Failed to assign task" };
+    }
+}
+
+export async function removeTaskFromOperation(taskId: string) {
+    try {
+        await prisma.backlogItem.update({
+            where: { id: taskId },
+            data: { operationId: null }
+        });
+        revalidatePath('/missions');
+        return { success: true };
+    } catch {
+        return { error: "Failed to remove task" };
+    }
+}

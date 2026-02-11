@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AddMissionForm } from "@/components/missions/AddMissionForm";
+import { OperationDialog } from "@/components/missions/OperationDialog";
 import { Ghost, Target, Trash2, FolderOpen, Globe, LayoutGrid } from "lucide-react";
 import { deleteBacklogItem, completeBacklogItem, type WisdomContent } from "@/actions/briefing";
 import { BacklogItem } from "@vanguard/db";
@@ -11,6 +12,7 @@ import { CompleteMissionButton } from "@/components/missions/CompleteMissionButt
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { toast } from "sonner";
+import { LinkTaskButton } from "@/components/missions/LinkTaskButton";
 
 interface MissionsViewProps {
     briefing: {
@@ -23,6 +25,7 @@ interface MissionsViewProps {
 
 export function MissionsView({ briefing, backlog, operations }: MissionsViewProps) {
     const [tab, setTab] = useState<'VOID' | 'CAMPAIGN'>('VOID');
+    const [isCreateOpOpen, setIsCreateOpOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-black text-white p-4 md:p-8 pb-32">
@@ -115,14 +118,17 @@ export function MissionsView({ briefing, backlog, operations }: MissionsViewProp
                                                 </div>
                                             )}
                                         </div>
-                                        <form action={async () => {
-                                            await deleteBacklogItem(item.id);
-                                            toast("Item Deleted");
-                                        }}>
-                                            <button className="text-zinc-700 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 p-2">
-                                                <Trash2 size={16} />
-                                            </button>
-                                        </form>
+                                        <div className="flex items-center gap-1">
+                                            <LinkTaskButton task={item} operations={operations} />
+                                            <form action={async () => {
+                                                await deleteBacklogItem(item.id);
+                                                toast("Item Deleted");
+                                            }}>
+                                                <button className="text-zinc-700 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 p-2">
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -140,7 +146,12 @@ export function MissionsView({ briefing, backlog, operations }: MissionsViewProp
                                     <Globe className="w-4 h-4" />
                                     <h3 className="font-bold uppercase tracking-widest text-xs">Operations Overview</h3>
                                 </div>
-                                {/* Future: Create Operation Button */}
+                                <button 
+                                    onClick={() => setIsCreateOpOpen(true)}
+                                    className="text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-emerald-400 border border-emerald-900 hover:bg-emerald-950/50 px-3 py-1.5 rounded transition-all"
+                                >
+                                    + New Campaign
+                                </button>
                             </div>
 
                             {operations.length === 0 ? (
@@ -157,6 +168,11 @@ export function MissionsView({ briefing, backlog, operations }: MissionsViewProp
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <OperationDialog 
+                    isOpen={isCreateOpOpen} 
+                    onClose={() => setIsCreateOpOpen(false)} 
+                />
             </div>
         </div>
     );

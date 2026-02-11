@@ -49,7 +49,7 @@ export async function createAlly(data: AllyFormData) {
                 userId: user.id,
                 name: data.name,
                 role: data.role,
-                frequencyDays: data.frequencyDays,
+                frequencyDays: parseInt(data.frequencyDays.toString()),
                 contactMethod: data.contactMethod,
                 lastContact: new Date() // Start fresh
             }
@@ -74,7 +74,7 @@ export async function updateAlly(id: string, data: AllyFormData) {
             data: {
                 name: data.name,
                 role: data.role,
-                frequencyDays: data.frequencyDays,
+                frequencyDays: parseInt(data.frequencyDays.toString()),
                 contactMethod: data.contactMethod,
             }
         });
