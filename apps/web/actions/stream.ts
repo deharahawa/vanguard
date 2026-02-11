@@ -19,7 +19,13 @@ export type FetchResult = {
     message?: string;
 };
 
+import { createClient } from "@/utils/supabase/server";
+import { prisma } from "@vanguard/db";
+
 export async function fetchIntelBatch(batchIndex: number): Promise<FetchResult> {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
     // 1. Guard Clause: Strict Limit
     if (batchIndex >= 3) {
         return { 
@@ -29,8 +35,38 @@ export async function fetchIntelBatch(batchIndex: number): Promise<FetchResult> 
         };
     }
 
+    if (!user) {
+        return { cards: [], stop: true, message: "UNAUTHORIZED ACCESS." };
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // 2. Check Cache
+    const cachedBatch = await prisma.dailyStreamCache.findUnique({
+        where: {
+            userId_date_batchIndex: {
+                userId: user.id,
+                date: today,
+                batchIndex
+            }
+        }
+    });
+
+    if (cachedBatch) {
+        // Parse JSON safely
+        const cards = typeof cachedBatch.cards === 'string' 
+            ? JSON.parse(cachedBatch.cards) 
+            : cachedBatch.cards as IntelCardData[];
+            
+        return {
+            cards,
+            stop: false
+        };
+    }
+
     try {
-        // 2. AI Generation
+        // 3. AI Generation
         const { object } = await generateObject({
             model: google("gemini-2.5-flash-lite"),
             schema: z.object({
@@ -59,6 +95,16 @@ export async function fetchIntelBatch(batchIndex: number): Promise<FetchResult> 
             `
         });
 
+        // 4. Cache Result
+        await prisma.dailyStreamCache.create({
+            data: {
+                userId: user.id,
+                date: today,
+                batchIndex,
+                cards: object.cards as any // JSON compatibility
+            }
+        });
+
         return {
             cards: object.cards,
             stop: false
@@ -68,7 +114,7 @@ export async function fetchIntelBatch(batchIndex: number): Promise<FetchResult> 
         console.error("Intel Generation Failed:", error);
         return {
             cards: [],
-            stop: false, // Allow retry? Or fail safe.
+            stop: false, // Allow retry based on implementation, or fail safe.
             message: "COMMS INTERFERENCE. RETRY."
         };
     }

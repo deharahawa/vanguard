@@ -163,3 +163,14 @@ model Season {
   badges       Json     // Array of medals/badges
   createdAt    DateTime @default(now())
 }
+
+model DailyStreamCache {
+  id         String   @id @default(uuid())
+  userId     String
+  date       DateTime
+  batchIndex Int
+  cards      Json     // Array of IntelCardData
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, date, batchIndex])
+}
