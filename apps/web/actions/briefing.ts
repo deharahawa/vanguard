@@ -124,6 +124,7 @@ export async function addToBacklog(content: string) {
         }
     });
     revalidatePath("/void");
+    revalidatePath("/missions");
 }
 
 export async function getBacklog() {
@@ -146,6 +147,7 @@ export async function deleteBacklogItem(id: string) {
         where: { id }
     });
     revalidatePath("/void");
+    revalidatePath("/missions");
 }
 
 export async function completeBacklogItem(id: string) {
@@ -158,4 +160,5 @@ export async function completeBacklogItem(id: string) {
         data: { status: "COMPLETED" }
     });
     revalidatePath("/void");
+    revalidatePath("/missions");
 }

@@ -1,8 +1,7 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { login, signUp } from "./actions";
 import { motion } from "framer-motion";
@@ -12,6 +11,7 @@ import { Suspense } from "react";
 function LoginContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (message) {
@@ -19,19 +19,29 @@ function LoginContent() {
     }
   }, [message]);
 
-  const handleLogin = async (formData: FormData) => {
-    const error = await login(formData);
-    if (error) {
-       toast.error(error);
+
+
+  const handleLoginClick = async (formData: FormData) => {
+    setIsLoading(true);
+    try {
+        const error = await login(formData);
+        if (error) toast.error(error);
+    } finally {
+        setIsLoading(false);
     }
   };
 
-   const handleSignUp = async (formData: FormData) => {
-    const error = await signUp(formData);
-    if (error) {
-       toast.error(error);
-    } else {
-       toast.success("Check your email to confirm sign up");
+  const handleSignUpClick = async (formData: FormData) => {
+    setIsLoading(true);
+    try {
+        const error = await signUp(formData);
+        if (error) {
+            toast.error(error);
+        } else {
+            toast.success("Check your email to confirm sign up");
+        }
+    } finally {
+        setIsLoading(false);
     }
   };
 
@@ -94,16 +104,27 @@ function LoginContent() {
           </div>
 
           <div className="pt-4 space-y-3">
-             <SubmitButton 
-                text="Authenticate" 
-                action={handleLogin} 
-                variant="primary"
-             />
-             <SubmitButton 
-                text="Initialize New Identity" 
-                action={handleSignUp} 
-                variant="secondary"
-             />
+             <button
+                formAction={handleLoginClick}
+                disabled={isLoading}
+                className={`w-full py-3 px-4 rounded-lg font-bold text-sm uppercase tracking-widest transition-all duration-200 
+                    bg-white text-black hover:bg-zinc-200 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]
+                    ${isLoading ? "opacity-50 cursor-wait" : ""}
+                `}
+             >
+               {isLoading ? "AUTHENTICATING..." : "AUTHENTICATE"}
+             </button>
+             
+             <button
+                formAction={handleSignUpClick}
+                disabled={isLoading}
+                className={`w-full py-3 px-4 rounded-lg font-bold text-sm uppercase tracking-widest transition-all duration-200 
+                    bg-transparent text-zinc-500 hover:text-white border border-transparent hover:border-zinc-700
+                    ${isLoading ? "opacity-50 cursor-wait" : ""}
+                `}
+             >
+                Initialize New Identity
+             </button>
           </div>
         </form>
         
@@ -127,24 +148,4 @@ export default function LoginPage() {
         <LoginContent />
     </Suspense>
   );
-}
-
-function SubmitButton({ text, action, variant }: { text: string, action: (formData: FormData) => Promise<void>, variant: 'primary' | 'secondary' }) {
-    const { pending } = useFormStatus();
-
-    return (
-        <button
-          formAction={action}
-          disabled={pending}
-          className={`w-full py-3 px-4 rounded-lg font-bold text-sm uppercase tracking-widest transition-all duration-200 
-            ${variant === 'primary' 
-                ? "bg-white text-black hover:bg-zinc-200 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
-                : "bg-transparent text-zinc-500 hover:text-white border border-transparent hover:border-zinc-700"
-            }
-            ${pending ? "opacity-50 cursor-wait" : ""}
-          `}
-        >
-          {text}
-        </button>
-    )
 }

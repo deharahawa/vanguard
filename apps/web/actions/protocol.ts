@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@vanguard/db";
-import { revalidatePath } from "next/cache";
+
 
 export async function logAdrenalineProtocol() {
     const supabase = createClient();
@@ -34,7 +34,7 @@ export async function logAdrenalineProtocol() {
 
         // In a real app, we'd have a 'logs' table. for now, we just return the XP value for the client to display.
         return { success: true, xpGained: 20 };
-    } catch (e) {
+    } catch {
         return { success: false, error: "Failed to log protocol" };
     }
 }

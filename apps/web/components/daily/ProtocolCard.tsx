@@ -8,7 +8,8 @@ import { logDailyMetrics } from "@/actions/daily";
 import { toast } from "sonner";
 import { useHaptic } from "@/hooks/useHaptic";
 import { useRouter } from "next/navigation";
-import { getProtocolConfig, DEFAULT_PROTOCOL_CONFIG } from "@/actions/settings";
+import { getProtocolConfig } from "@/actions/settings";
+import { DEFAULT_PROTOCOL_CONFIG } from "@/lib/protocol-config";
 import { useEffect } from "react";
 
 type Metrics = {

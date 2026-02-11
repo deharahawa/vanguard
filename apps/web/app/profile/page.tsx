@@ -1,4 +1,5 @@
 import { getProfileData, updateIdentity } from "@/actions/profile";
+import { ServiceRecord } from "@/components/profile/ServiceRecord";
 import { MoveLeft, User } from "lucide-react";
 import Link from "next/link";
 import { SkillCard } from "@/components/profile/SkillCard";
@@ -72,6 +73,9 @@ export default async function ProfilePage() {
                 <div className="text-6xl font-black text-white tracking-tighter">{totalLevel}</div>
             </div>
         </div>
+
+        {/* SECTION: SERVICE RECORD (Seasons) */}
+        <ServiceRecord />
 
         {/* Skills Grid */}
         <div className="space-y-4">

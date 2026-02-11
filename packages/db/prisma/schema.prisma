@@ -80,8 +80,11 @@ model BacklogItem {
   userId    String
   content   String
   status    String   @default("PENDING") // PENDING | COMPLETED
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  category    String   @default("GENERAL") // GENERAL, LEARNING, HEALTH, WORK
+  operationId String?
+  operation   Operation? @relation(fields: [operationId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model DailyBriefing {
@@ -95,4 +98,68 @@ model DailyBriefing {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, date])
+}
+
+model SavedIntel {
+  id           String   @id @default(uuid())
+  userId       String
+  cardId       String
+  category     String
+  title        String
+  content      String
+  referenceUrl String?
+  color        String?
+  createdAt    DateTime @default(now())
+
+  @@unique([userId, cardId])
+}
+
+model DojoCard {
+  id        String   @id @default(uuid())
+  category  String   // STRATEGY, TECH, SOUL
+  content   String   // The prompt/question
+  createdAt DateTime @default(now())
+}
+
+model DojoEntry {
+  id           String   @id @default(uuid())
+  userId       String
+  prompt       String
+  userResponse String
+  aiFeedback   String
+  category     String
+  createdAt    DateTime @default(now())
+}
+
+model Ally {
+  id            String   @id @default(uuid())
+  userId        String
+  name          String
+  role          String   // e.g., "Inner Circle", "Family", "Network"
+  frequencyDays Int      // Ideal gap between contacts
+  lastContact   DateTime
+  contactMethod String?  // WhatsApp URL or Phone
+  createdAt     DateTime @default(now())
+}
+
+model Operation {
+  id        String        @id @default(uuid())
+  userId    String
+  title     String
+  deadline  DateTime?
+  status    String        @default("ACTIVE") // ACTIVE, COMPLETED
+  createdAt DateTime      @default(now())
+  tasks     BacklogItem[]
+}
+
+model Season {
+  id           String   @id @default(uuid())
+  userId       String
+  name         String
+  startDate    DateTime
+  endDate      DateTime
+  totalXP      Int
+  rankAchieved String
+  badges       Json     // Array of medals/badges
+  createdAt    DateTime @default(now())
 }

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 import { generateBriefing } from "@/actions/ai";
 
 export default async function ChroniclePage() {

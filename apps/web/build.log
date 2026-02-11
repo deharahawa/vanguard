@@ -1,0 +1,218 @@
+
+> web@0.1.0 build /home/deco/github/vanguard/apps/web
+> next build
+
+  ▲ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: /home/deco/github/vanguard/apps/web/public/sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ⚠ Compiled with warnings
+
+./components/missions/CompleteMissionButton.tsx
+Attempted import error: 'useFormStatus' is not exported from 'react-dom' (imported as 'useFormStatus').
+
+Import trace for requested module:
+./components/missions/CompleteMissionButton.tsx
+
+./components/missions/CompleteMissionButton.tsx
+Attempted import error: 'useFormStatus' is not exported from 'react-dom' (imported as 'useFormStatus').
+
+Import trace for requested module:
+./components/missions/CompleteMissionButton.tsx
+
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/16) ...
+
+Error occurred prerendering page "/onboarding". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/login". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/missions". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/briefing". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/chronicle". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/profile". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+   Generating static pages (4/16) 
+
+Error occurred prerendering page "/archive". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/_not-found". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+   Generating static pages (8/16) 
+
+Error occurred prerendering page "/settings". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+   Generating static pages (12/16) 
+
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/dashboard". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+
+Error occurred prerendering page "/stream". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: n.cache is not a function
+    at i (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:1784)
+    at _ (/home/deco/github/vanguard/apps/web/.next/server/chunks/584.js:2:5188)
+    at Module._ (/home/deco/github/vanguard/apps/web/.next/server/chunks/979.js:64:9894)
+    at no (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:20355)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:726
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:17831)
+    at /home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:20:616
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (/home/deco/github/vanguard/node_modules/.pnpm/next@14.2.35_@babel+core@7.29.0_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:13:16935)
+ ✓ Generating static pages (16/16)
+
+> Export encountered errors on following paths:
+	/_not-found/page: /_not-found
+	/archive/page: /archive
+	/briefing/page: /briefing
+	/chronicle/page: /chronicle
+	/dashboard/page: /dashboard
+	/login/page: /login
+	/missions/page: /missions
+	/onboarding/page: /onboarding
+	/page: /
+	/profile/page: /profile
+	/settings/page: /settings
+	/stream/page: /stream
+ ELIFECYCLE  Command failed with exit code 1.

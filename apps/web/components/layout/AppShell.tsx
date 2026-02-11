@@ -2,12 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Sparkles, Target, Archive, Shield, Settings } from "lucide-react";
+import { Home, Sparkles, Target, Archive, Settings, Radio, User, Zap, Users } from "lucide-react";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { useState, useEffect } from "react";
 
 import { AdrenalineWizard } from "@/components/protocols/AdrenalineWizard";
-import { Zap } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -40,15 +39,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const NAV_ITEMS = [
     { label: "Command", icon: Home, href: "/dashboard" },
     { label: "Oracle", icon: Sparkles, href: "/briefing" },
-    { label: "Missions", icon: Target, href: "/missions" },
+    { label: "Network", icon: Users, href: "/network" },
+    { label: "Stream", icon: Radio, href: "/stream" },
     { label: "Protocol", icon: Zap, href: "#adrenaline", special: true }, // The Zap
+    { label: "Missions", icon: Target, href: "/missions" },
     { label: "Archive", icon: Archive, href: "/archive" },
-    { label: "Armory", icon: Shield, href: "/profile" },
     { label: "Control", icon: Settings, href: "/settings" },
   ];
 
   return (
     <div className="flex h-screen bg-black text-white relative">
+        {/* Global Profile Button (Mobile/Desktop) */}
+        <Link 
+            href="/profile"
+            className="fixed top-4 left-4 z-50 p-2 bg-zinc-900/80 backdrop-blur border border-zinc-800 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all shadow-lg"
+        >
+            <User size={16} />
+        </Link>
+
         {/* Offline Indicator */}
         {isOffline && (
             <div className="fixed top-4 right-4 z-[100] animate-pulse">
@@ -63,7 +71,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r border-zinc-900 p-6 bg-zinc-950">
-        <div className="mb-12">
+        <div className="mb-12 pl-12">
             <h1 className="text-2xl font-black tracking-tighter uppercase text-white">Vanguard</h1>
             <p className="text-zinc-600 font-mono text-xs uppercase tracking-widest">Protocol Active</p>
         </div>

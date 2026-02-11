@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Zap, Check, X, Droplet, Flame, Activity, Wind } from "lucide-react";
+import { Check, X, Droplet, Flame, Activity, Wind } from "lucide-react";
 import { useHaptic } from "@/hooks/useHaptic";
 import { logAdrenalineProtocol } from "@/actions/protocol";
 import { toast } from "sonner";
@@ -124,7 +124,7 @@ export function AdrenalineWizard({ onClose }: AdrenalineWizardProps) {
 
                 <div className="space-y-2 z-10">
                     <h2 className={clsx("text-sm font-bold uppercase tracking-[0.2em] mb-4 opacity-70", currentStep.color)}>
-                        STEP {stepIndex + 1} // {currentStep.id.toUpperCase()}
+                        STEP {stepIndex + 1} {/* {currentStep.id.toUpperCase()} */}
                     </h2>
                     <h1 className="text-4xl md:text-5xl font-black text-white italic uppercase tracking-tighter leading-none">
                         {currentStep.instruction}

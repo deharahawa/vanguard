@@ -1,30 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
-import { getProtocolConfig, updateProtocolConfig, DEFAULT_PROTOCOL_CONFIG } from "@/actions/settings";
-import { Save, Bell, Database, Trash2, Download, AlertTriangle } from "lucide-react";
+import { getProtocolConfig, updateProtocolConfig } from "@/actions/settings";
+import { DEFAULT_PROTOCOL_CONFIG } from "@/lib/protocol-config";
+import { Save, Bell, Database, Trash2, Download, AlertTriangle, Award } from "lucide-react";
 import { useHaptic } from "@/hooks/useHaptic";
-
-function SubmitButton() {
-    const { pending } = useFormStatus();
-    return (
-        <button 
-            type="submit" 
-            disabled={pending}
-            className="flex items-center gap-2 px-6 py-3 bg-white text-black hover:bg-zinc-200 font-bold uppercase tracking-widest rounded-lg transition-all text-xs disabled:opacity-50"
-        >
-            <Save size={16} />
-            {pending ? "Saving..." : "Save Configuration"}
-        </button>
-    );
-}
+import { EndSeasonButton } from "@/components/settings/EndSeasonButton";
 
 export default function SettingsPage() {
     const { triggerHaptic } = useHaptic();
     const [config, setConfig] = useState(DEFAULT_PROTOCOL_CONFIG);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
         getProtocolConfig().then((data) => {
@@ -33,7 +21,11 @@ export default function SettingsPage() {
         });
     }, []);
 
-    const handleSave = async (formData: FormData) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setIsSaving(true);
+        const formData = new FormData(event.currentTarget);
+
         const newConfig = {
             op1: String(formData.get("op1")),
             op2: String(formData.get("op2")),
@@ -51,21 +43,27 @@ export default function SettingsPage() {
         } catch {
             toast.error("UPDATE FAILED");
             triggerHaptic("warning");
+        } finally {
+            setIsSaving(false);
         }
     };
 
     const requestNotifications = () => {
-        if (!("Notification" in window)) {
-            toast.error("This browser does not support desktop notification");
-        } else if (Notification.permission === "granted") {
-            toast.info("Notifications already granted.");
-        } else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then((permission) => {
-                if (permission === "granted") {
-                    toast.success("Notifications enabled.");
-                    triggerHaptic("success");
-                }
-            });
+        if ("Notification" in window) {
+           if (Notification.permission === "granted") {
+                toast.info("Notifications already granted.");
+           } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === "granted") {
+                        toast.success("Notifications enabled.");
+                        triggerHaptic("success");
+                    }
+                });
+            } else {
+                toast.error("Notifications denied in browser.");
+            }
+        } else {
+             toast.error("This browser does not support desktop notification");
         }
     };
 
@@ -87,7 +85,7 @@ export default function SettingsPage() {
                         <h2 className="text-xl font-bold uppercase tracking-widest">Protocol Loadout</h2>
                     </div>
                     
-                    <form action={handleSave} className="space-y-8 bg-zinc-950 border border-zinc-900 p-6 rounded-2xl">
+                    <form onSubmit={handleSubmit} className="space-y-8 bg-zinc-950 border border-zinc-900 p-6 rounded-2xl">
                         {/* Operator */}
                         <div className="space-y-4">
                             <h3 className="text-xs font-bold text-amber-500 uppercase tracking-widest">Operator (Body)</h3>
@@ -115,7 +113,14 @@ export default function SettingsPage() {
                         </div>
 
                         <div className="pt-4 border-t border-zinc-900 flex justify-end">
-                            <SubmitButton />
+                            <button 
+                                type="submit" 
+                                disabled={isSaving}
+                                className="flex items-center gap-2 px-6 py-3 bg-white text-black hover:bg-zinc-200 font-bold uppercase tracking-widest rounded-lg transition-all text-xs disabled:opacity-50"
+                            >
+                                <Save size={16} />
+                                {isSaving ? "Saving..." : "Save Configuration"}
+                            </button>
                         </div>
                     </form>
                 </section>
@@ -139,6 +144,27 @@ export default function SettingsPage() {
                             >
                                 Request Access
                             </button>
+                        </div>
+                    </div>
+                </section>
+
+                 {/* SECTION: SEASONS (The Prestige) */}
+                 <section className="space-y-6">
+                     <div className="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                        <Award className="w-5 h-5 text-amber-500" />
+                        <h2 className="text-xl font-bold uppercase tracking-widest">Season Management</h2>
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-amber-950/10 to-transparent border border-amber-900/30 p-6 rounded-2xl flex flex-col gap-4">
+                         <div className="flex items-center justify-between">
+                            <div>
+                                <h3 className="font-bold text-amber-500">End Current Season</h3>
+                                <p className="text-xs text-zinc-500 max-w-md">
+                                    Archive your current progress, generate a service record, and restart with a Prestige multiplier. 
+                                    <span className="block mt-1 text-red-400 font-bold">WARNING: IRREVERSIBLE ACTION.</span>
+                                </p>
+                            </div>
+                            <EndSeasonButton />
                         </div>
                     </div>
                 </section>
