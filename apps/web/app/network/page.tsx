@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getNetworkStatus, AllyWithHealth } from "@/actions/network";
+import { getNetworkStatus } from "@/actions/network";
+import { AllyWithHealth } from "@/types/network";
 import { AllyCard } from "@/components/network/AllyCard";
 import { Users, Loader2 } from "lucide-react";
+import { AllyForm } from "@/components/network/AllyForm";
 
 export default function NetworkPage() {
     const [allies, setAllies] = useState<AllyWithHealth[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showAdd, setShowAdd] = useState(false);
 
     useEffect(() => {
         const load = async () => {
@@ -48,14 +51,26 @@ export default function NetworkPage() {
                         <AllyCard key={ally.id} ally={ally} />
                     ))}
                     
-                    {/* Add Ally Placeholder (Future Slice) */}
-                    <div className="border border-zinc-800 border-dashed rounded-xl flex items-center justify-center p-12 opacity-50 hover:opacity-100 transition-opacity cursor-not-allowed group">
+                    <button 
+                        onClick={() => setShowAdd(true)}
+                        className="border border-zinc-800 border-dashed rounded-xl flex items-center justify-center p-12 opacity-50 hover:opacity-100 transition-all hover:bg-zinc-900/50 group"
+                    >
                         <div className="text-center space-y-2">
                             <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center mx-auto group-hover:bg-zinc-800 transition-colors">
-                                <span className="text-2xl text-zinc-500">+</span>
+                                <span className="text-2xl text-zinc-500 group-hover:text-emerald-500 transition-colors">+</span>
                             </div>
-                            <span className="text-xs font-mono uppercase tracking-widest text-zinc-600">Recruit Ally</span>
+                            <span className="text-xs font-mono uppercase tracking-widest text-zinc-600 group-hover:text-white transition-colors">Recruit Ally</span>
                         </div>
+                    </button>
+                </div>
+            )}
+
+            {/* Add Ally Modal */}
+             {showAdd && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                    <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in zoom-in duration-300">
+                        <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-wider">Recruit Ally</h2>
+                        <AllyForm onClose={() => setShowAdd(false)} />
                     </div>
                 </div>
             )}
